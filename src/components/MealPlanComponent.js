@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getMealImage } from "../features/recipes/mealPlan/mealplanSlice";
+import Loading from "./Loading";
+
+const noPhoto =
+  "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
 const MealPlanComponent = ({ item }) => {
   const { servings, title, readyInMinutes: time, id } = item;
@@ -15,26 +19,35 @@ const MealPlanComponent = ({ item }) => {
   //     )
   //   );
   // }, [item.id]);
-  const [imageUrl, setImageUrl] = React.useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch(
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`
     )
-      .then((response) => response.json())
+      .then((response) => {
+        setLoading(true);
+        return response.json();
+      })
       .then((data) => {
         setImageUrl(data.image);
+        setLoading(false);
       })
       .catch(() => {
         console.log("error");
       });
   }, [id]);
 
+  if (loading) {
+    return <Loading />;
+  }
+  console.log(imageUrl);
   return (
     <Wrapper>
       <div className="container">
         <h4>{title}</h4>
-        <img src={imageUrl} alt={title} />
+        <img src={imageUrl === "" ? <Loading /> : imageUrl} alt={title} />
         <p>{servings} servings</p>
         <span>{time}min.</span>
       </div>
