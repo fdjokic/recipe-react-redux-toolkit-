@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { getMealImage } from "../features/recipes/mealPlan/mealplanSlice";
 import Loading from "./Loading";
+import MiniLoading from "./MiniLoading";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { IoIosTimer } from "react-icons/io";
+import { GiMeal } from "react-icons/gi";
 
 const noPhoto =
   "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
@@ -39,17 +44,31 @@ const MealPlanComponent = ({ item }) => {
       });
   }, [id]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
+  // if (!imageUrl) {
+  //   return <MiniLoading />;
+  // }
   console.log(imageUrl);
   return (
     <Wrapper>
       <div className="container">
-        <h4>{title}</h4>
-        <img src={imageUrl === "" ? <Loading /> : imageUrl} alt={title} />
-        <p>{servings} servings</p>
-        <span>{time}min.</span>
+        <div className="img-container">
+          <LazyLoadImage
+            effect="blur"
+            className="img-class"
+            src={imageUrl}
+            alt={title}
+          />
+        </div>
+        <h4 className="title">{title}</h4>
+        <p>
+          {servings} servings <GiMeal className="icon" />
+        </p>
+        <span>
+          {time}min. <IoIosTimer className="icon" />
+        </span>
       </div>
       <header />
     </Wrapper>
@@ -61,13 +80,39 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 250px;
   }
-  header {
+  .img-container {
+    max-width: 250px;
+    height: 180px;
+  }
+  .img-class {
+    max-width: 250px;
+    object-fit: contain;
+
+    border-radius: 10px;
+    border: 3px solid orange;
+    background-color: orange;
+  }
+  .title {
+    width: 90%;
+    border-bottom: 2px solid grey;
+    padding: 0.3rem;
+    text-align: center;
+    color: brown;
+  }
+  span {
     display: flex;
-    height: 1px;
-    flex-direction: row;
-    background-color: black;
-    color: black;
+    align-items: center;
+  }
+  .icon {
+    color: orange;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+  p {
+    display: flex;
+    align-items: center;
   }
 `;
 export default MealPlanComponent;
