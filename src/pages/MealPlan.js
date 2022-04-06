@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Loading from "../components/Loading";
 import styled from "styled-components";
 import MealPlanComponent from "../components/MealPlanComponent";
+import { removePrevious } from "../features/recipes/mealPlan/mealplanSlice";
 
 const MealPlan = () => {
   const {
@@ -24,6 +25,7 @@ const MealPlan = () => {
 
   useEffect(() => {
     dispatch(getMealPlan());
+    return () => dispatch(removePrevious());
   }, []);
 
   // if (loading) {
@@ -34,6 +36,7 @@ const MealPlan = () => {
   // const handleChange = (e) => {
   //   let value = e.target.value;
   // };
+
   return (
     <Wrapper>
       <label htmlFor="calories"></label>
@@ -102,18 +105,35 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  min-height: 100vh;
+  /* background: url("images/mealplan-pattern.png"); */
+  background: url("images/table2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   .day-container {
+    opacity: 0.9;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    min-height: 400px;
+    width: 60vw;
+    border-radius: 15px;
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     h1 {
-      color: red;
+      padding-top: 1rem;
+
+      color: #e75480;
+      border-bottom: 3px solid #e75480;
+      background-color: transparent;
       text-transform: capitalize;
     }
   }
   .day {
+    padding: 0.4rem;
+    background-color: transparent;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

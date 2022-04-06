@@ -1133,6 +1133,11 @@
   dependencies:
     postcss-value-parser "^4.2.0"
 
+"@emailjs/browser@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-3.5.0.tgz#2492baa62df0edef1012cbb26f90a7d23b9d54b0"
+  integrity sha512-VDpyaF2Xkt21/gRaV5TgZ8+CSsMy3+UTJo7K3/NL63gfBQIzrVQiK1U7Jw4PqpFDps9a1Gj7q8gfJ7thxUIRcw==
+
 "@emotion/is-prop-valid@^1.1.0":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.1.2.tgz#34ad6e98e871aa6f7a20469b602911b8b11b3a95"
@@ -1422,6 +1427,11 @@
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
     source-map "^0.7.3"
+
+"@react-leaflet/core@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@react-leaflet/core/-/core-1.1.1.tgz#827fd05bb542cf874116176d8ef48d5b12163f81"
+  integrity sha512-7PGLWa9MZ5x/cWy8EH2VzI4T8q5WpuHbixzCDXqixP/WyqwIrg5NDUPgYuFnB4IEIZF+6nA265mYzswFo/h1Pw==
 
 "@reduxjs/toolkit@^1.8.1":
   version "1.8.1"
@@ -5694,6 +5704,11 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
+leaflet@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
+  integrity sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -7165,6 +7180,13 @@ react-lazy-load-image-component@^1.5.3:
   dependencies:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
+
+react-leaflet@^3.2.5:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-3.2.5.tgz#bec0bfab9dd8c2b030ea630f7a0687a60322ca7d"
+  integrity sha512-Z3KZ+4SijsRbbrt2I1a3ZDY6+V6Pm91eYTdxTN18G6IOkFRsJo1BuSPLFnyFrlF3WDjQFPEcTPkEgD1VEeAoBg==
+  dependencies:
+    "@react-leaflet/core" "^1.1.1"
 
 react-redux@^7.2.7:
   version "7.2.7"

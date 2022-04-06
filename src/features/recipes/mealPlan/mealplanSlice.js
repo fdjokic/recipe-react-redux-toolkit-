@@ -29,7 +29,11 @@ export const getMealPlan = createAsyncThunk(
 const mealPlan = createSlice({
   name: "mealPlan",
   initialState,
-  reducers: {},
+  reducers: {
+    removePrevious: (state) => {
+      return;
+    },
+  },
   extraReducers: {
     [getMealPlan.pending]: (state) => {
       state.loading = true;
@@ -45,5 +49,7 @@ const mealPlan = createSlice({
     },
   },
 });
+
+export const { removePrevious } = mealPlan.actions;
 
 export default mealPlan.reducer;

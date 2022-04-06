@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   background-color: #f6f6f6;
-
+  background-position: center;
+  background-size: cover;
   font-family: "Lobster", cursive;
 }

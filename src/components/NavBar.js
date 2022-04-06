@@ -40,10 +40,6 @@ const NavBar = () => {
           Login/Sign Up
         </Link>
       </nav>
-      <div className="text">
-        <h1>Let's cook!</h1>
-        <p>Choose Your Recepe Now!</p>
-      </div>
     </Navbar>
   );
 };
@@ -51,11 +47,11 @@ const Navbar = styled.nav`
   border: 5px solid #f6f6f6;
 
   border-radius: 10px;
-  background-image: url("images/recipe_background.jpg");
+  background: url("/images/vegetables.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 40vh;
+  height: 10vh;
   nav {
     font-family: "Lobster", cursive;
     padding: 0.5rem;
@@ -148,11 +144,6 @@ const Navbar = styled.nav`
   }
 
   @media only screen and (max-width: 768px) {
-    height: 40vh;
-    .text {
-      top: 20%;
-      left: 10%;
-    }
     nav {
       justify-content: space-between;
     }
