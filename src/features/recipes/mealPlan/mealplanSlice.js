@@ -12,14 +12,9 @@ export const getMealPlan = createAsyncThunk(
   "mealPlan/getMealPlan",
   async (url, thunkAPI) => {
     try {
-      const {
-        mealPlan: { targetCalories },
-      } = thunkAPI.getState();
-      const response = await axios(
-        `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.REACT_APP_API_KEY}&targetCalories=${targetCalories}`
-      );
-      console.log(mealPlan);
-      return response.data.week;
+      const response = await axios(url);
+      console.log(response);
+      return response.data.meals;
     } catch (error) {
       return thunkAPI.rejectWithValue("Something went wrong");
     }
@@ -30,8 +25,11 @@ const mealPlan = createSlice({
   name: "mealPlan",
   initialState,
   reducers: {
+    selectCalories: (state, action) => {
+      state.targetCalories = action.payload;
+    },
     removePrevious: (state) => {
-      return;
+      state.mealPlan = [];
     },
   },
   extraReducers: {
@@ -50,6 +48,6 @@ const mealPlan = createSlice({
   },
 });
 
-export const { removePrevious } = mealPlan.actions;
+export const { removePrevious, selectCalories } = mealPlan.actions;
 
 export default mealPlan.reducer;

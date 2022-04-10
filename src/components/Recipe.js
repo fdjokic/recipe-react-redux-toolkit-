@@ -12,6 +12,12 @@ const Recipe = ({ recipe }) => {
   );
 };
 const Wrapper = styled.div`
+  padding: 0.5rem;
+  h3 {
+    padding: 0.3rem;
+    text-align: center;
+    color: black;
+  }
   img {
     height: 13rem;
     border-radius: 10px;

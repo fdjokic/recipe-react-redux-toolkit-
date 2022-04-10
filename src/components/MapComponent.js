@@ -46,12 +46,13 @@ const MapComponent = () => {
 const Wrapper = styled.div`
   height: 60vh;
   background-color: rgba(0, 0, 0, 0.8);
-  width: 40vw;
+  width: 60vw;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   border-radius: 20px;
+  margin-bottom: 1rem;
 
   .map-wrap {
     background: rgba(8, 253, 216, 0.1);

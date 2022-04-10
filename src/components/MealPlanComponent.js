@@ -8,13 +8,14 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { IoIosTimer } from "react-icons/io";
 import { GiMeal } from "react-icons/gi";
+import { motion } from "framer-motion";
+import InstructionsCard from "./InstructionsCard";
 
 // const noPhoto =
 //   "https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png";
 
 const MealPlanComponent = ({ item }) => {
   const { servings, title, readyInMinutes: time, id } = item;
-  const dispatch = useDispatch();
   // const { imageUrl } = useSelector((store) => store.mealPlan);
 
   // useEffect(() => {
@@ -27,6 +28,8 @@ const MealPlanComponent = ({ item }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [noPhoto, setNoPhoto] = useState("");
+  const [instructions, setInstructions] = useState("");
+  const [cardOpen, setCardOpen] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -37,6 +40,8 @@ const MealPlanComponent = ({ item }) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
+        setInstructions(data.instructions);
         setImageUrl(data.image);
         setLoading(false);
       })
@@ -52,32 +57,32 @@ const MealPlanComponent = ({ item }) => {
     return () => clearTimeout(timeout);
   }, [id]);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-  // if (!imageUrl) {
-  //   return <MiniLoading />;
-  // }
-  console.log(imageUrl);
   return (
     <Wrapper>
-      <div className="container">
-        <div className="img-container">
+      <motion.div
+        layout
+        className="container"
+        onClick={() => setCardOpen(!cardOpen)}
+      >
+        <motion.div className="img-container">
           <LazyLoadImage
             effect="blur"
             className="img-class"
             src={imageUrl || noPhoto}
             alt={title}
           />
-        </div>
-        <h3 className="title">{title}</h3>
-        <p>
+        </motion.div>
+        <motion.h3 className="title">{title}</motion.h3>
+        <motion.p>
           {servings} servings <GiMeal className="icon" />
-        </p>
-        <span>
+        </motion.p>
+        <motion.span>
           {time}min. <IoIosTimer className="icon" />
-        </span>
-      </div>
+        </motion.span>
+        {cardOpen ? (
+          <InstructionsCard instructions={instructions} imageUrl={imageUrl} />
+        ) : null}
+      </motion.div>
       <header />
     </Wrapper>
   );
@@ -92,6 +97,16 @@ const Wrapper = styled.div`
     justify-content: center;
     width: 250px;
     background-color: transparent;
+  }
+
+  .instructions {
+    position: absolute;
+    width: 120vw;
+    height: 120vh;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
+    border: 5px solid black;
+    z-index: 999;
   }
   .img-container {
     max-width: 250px;

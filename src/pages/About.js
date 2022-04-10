@@ -42,16 +42,19 @@ const About = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  height: 80vh;
-  background: url("images/wooden-table.jpg");
+  flex-wrap: wrap;
+  min-height: 80vh;
+  background: url("images/table-top.jpg");
   background-size: cover;
+  color: white;
   label {
     background: transparent;
+    text-align: center;
   }
   .contact-form {
     display: flex;
@@ -59,22 +62,26 @@ const Wrapper = styled.div`
     background: transparent;
     flex-direction: column;
     justify-content: space-around;
-    width: 20rem;
+    width: 25rem;
+    margin: 1rem 0 1rem 0;
     height: 30rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0.7rem;
 
     input[type="text"],
     input[type="email"] {
-      width: 100%;
+      width: 80%;
       border: none;
       height: 50px;
       font-size: 16px;
       background: transparent;
-      color: black;
+      color: white;
       padding: 0 20px;
       box-sizing: border-box;
       border: 1px solid black;
       border-radius: 5px;
       outline: none;
+      margin: 0 auto;
     }
 
     input[type="submit"] {
@@ -117,16 +124,18 @@ const Wrapper = styled.div`
     textarea {
       outline: none;
       max-width: 100%;
-      min-width: 100%;
       max-height: 15rem;
       height: 15rem;
+      width: 80%;
+      margin: 0 auto;
       min-height: 15rem;
       border: none;
-      background: #115173;
+      background: rgba(0, 0, 0, 0.7);
       font-size: 16px;
       color: #fff;
       padding: 20px;
       box-sizing: border-box;
+      border-radius: 10px;
     }
   }
 `;

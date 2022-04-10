@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getMealPlan } from "../features/recipes/mealPlan/mealplanSlice";
 import { useSelector, useDispatch } from "react-redux";
-import Loading from "../components/Loading";
 import styled from "styled-components";
 import MealPlanComponent from "../components/MealPlanComponent";
-import { removePrevious } from "../features/recipes/mealPlan/mealplanSlice";
+import {
+  removePrevious,
+  selectCalories,
+} from "../features/recipes/mealPlan/mealplanSlice";
 
 const MealPlan = () => {
   const {
@@ -14,88 +16,47 @@ const MealPlan = () => {
     loading,
   } = useSelector((store) => store.mealPlan);
   const dispatch = useDispatch();
-
-  const { monday: { meals: mondayMeals = [] } = {} } = mealPlan;
-  const { tuesday: { meals: tuesdayMeals = [] } = {} } = mealPlan;
-  const { wednesday: { meals: wednesdayMeals = [] } = {} } = mealPlan;
-  const { thursday: { meals: thursdayMeals = [] } = {} } = mealPlan;
-  const { friday: { meals: fridayMeals = [] } = {} } = mealPlan;
-  const { saturday: { meals: saturdayMeals = [] } = {} } = mealPlan;
-  const { sunday: { meals: sundayMeals = [] } = {} } = mealPlan;
+  const [calories, setCalories] = useState(2000);
 
   useEffect(() => {
-    dispatch(getMealPlan());
-    return () => dispatch(removePrevious());
+    dispatch(
+      getMealPlan(
+        `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.REACT_APP_API_KEY}&timeFrame=day&targetCalories=${calories}`
+      )
+    );
   }, []);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-  const weekPlan = Object.keys(mealPlan);
-  console.log(mealPlan);
-  // const handleChange = (e) => {
-  //   let value = e.target.value;
-  // };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      getMealPlan(
+        `https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.REACT_APP_API_KEY}&timeFrame=day&targetCalories=${calories}`
+      )
+    );
+  };
   return (
     <Wrapper>
-      <label htmlFor="calories"></label>
-      <div className="day-container">
-        <h1>{weekPlan[0]}</h1>
-        <section className="day">
-          {mondayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[1]}</h1>
-        <section className="day">
-          {tuesdayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[2]}</h1>
-        <section className="day">
-          {wednesdayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[3]}</h1>
-        <section className="day">
-          {thursdayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[4]}</h1>
-        <section className="day">
-          {fridayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[5]}</h1>
-        <section className="day">
-          {saturdayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
-      <div className="day-container">
-        <h1>{weekPlan[6]}</h1>
-        <section className="day">
-          {sundayMeals.map((item) => {
-            return <MealPlanComponent item={item} key={item.id} />;
-          })}
-        </section>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="calories">Your wanted meal per calories</label>
+        <input
+          className="calories"
+          placeholder="Number of Calories"
+          type="number"
+          min={300}
+          max={4000}
+          name="calories"
+          value={calories}
+          onChange={(e) => setCalories(e.target.value)}
+        />
+        <div className="day-container">
+          <h2>Select your meal</h2>
+          <section className="day">
+            {mealPlan.map((item) => {
+              return <MealPlanComponent item={item} key={item.id} />;
+            })}
+          </section>
+        </div>
+      </form>
     </Wrapper>
   );
 };
@@ -103,13 +64,42 @@ const MealPlan = () => {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   min-height: 100vh;
   /* background: url("images/mealplan-pattern.png"); */
   background: url("images/table2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  label {
+    background: transparent;
+    text-align: center;
+    font-size: 2rem;
+    margin: 1rem auto;
+    color: orange;
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  h2 {
+    padding: 0.5rem;
+    background: transparent;
+  }
+  .calories {
+    padding: 0.6rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    margin: 1rem auto;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+  }
+
   .day-container {
     opacity: 0.9;
 
@@ -118,6 +108,8 @@ const Wrapper = styled.div`
     width: 60vw;
     border-radius: 15px;
     margin-top: 2rem;
+    margin-bottom: 1rem;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
