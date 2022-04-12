@@ -11,9 +11,11 @@ import MealPlan from "./pages/MealPlan";
 
 import "./App.css";
 import Loading from "./components/Loading";
+import RecipePopUp from "./components/RecipePopUp";
 
 function App() {
   const { loading } = useSelector((store) => store.mealPlan);
+  const { recipes } = useSelector((store) => store.recipes);
 
   return (
     <>
@@ -21,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home />} />
+            <Route path="/recipes/:id" element={<RecipePopUp />} />
+
             <Route path="about" element={<About />} />
             <Route path="login" element={<Login />} />
             <Route path="mealplan" element={<MealPlan />} />

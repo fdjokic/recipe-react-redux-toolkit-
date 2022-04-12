@@ -39,6 +39,14 @@ const mealPlan = createSlice({
     },
     [getMealPlan.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      const exists = localStorage.getItem("meal");
+      if (exists) {
+        state.mealPlan = payload;
+      } else {
+        localStorage.setItem("meal", JSON.stringify(payload));
+        state.mealPlan = payload;
+        console.log(payload);
+      }
       state.mealPlan = payload;
     },
     [getMealPlan.rejected]: (state, action) => {

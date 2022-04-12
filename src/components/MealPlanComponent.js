@@ -99,15 +99,6 @@ const Wrapper = styled.div`
     background-color: transparent;
   }
 
-  .instructions {
-    position: absolute;
-    width: 120vw;
-    height: 120vh;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.7);
-    border: 5px solid black;
-    z-index: 999;
-  }
   .img-container {
     max-width: 250px;
     max-height: 270px;
