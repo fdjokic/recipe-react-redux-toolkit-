@@ -55,10 +55,10 @@ const Slider1 = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 4rem;
-
+  margin-bottom: 2rem;
   .recipes {
-    width: 100vw;
+    width: 95vw;
+    max-width: 100%;
     max-height: 100vh;
     margin: 0 auto;
     max-width: 100%;

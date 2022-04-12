@@ -145,35 +145,38 @@ const Wrapper = styled.div`
     margin: 3rem auto;
     display: flex;
     justify-content: center;
-
+    max-width: 100%;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 3rem;
     border-radius: 20px;
   }
   .card {
-    position: relative;
-    height: 13rem;
-
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    width: 20rem;
+    height: 20rem;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.3rem;
+    width: 17rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 0.4rem;
     img {
+      height: 14rem;
       border: 3px solid brown;
-      object-fit: contain;
-      border-radius: 5px;
+      background-color: brown;
+      width: 15rem;
+
+      object-fit: cover;
+      border-radius: 13px;
     }
     h3 {
-      display: none;
-      position: absolute;
-      bottom: 5%;
-      color: white;
-      opacity: 0;
-      background: rgba(0, 0, 0, 0.6);
-      transition: 1s;
     }
   }
-  .card:hover h3 {
-    opacity: 1;
-    transition: 1s;
-    display: block;
-  }
+
   input {
     width: 20rem;
     padding: 0.4rem;

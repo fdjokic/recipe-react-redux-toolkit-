@@ -69,7 +69,8 @@ const Wrapper = styled.div`
   img {
     max-height: 13rem;
     border-radius: 10px;
-    max-width: 15rem;
+    min-width: 21rem;
+    object-fit: cover;
   }
 `;
 export default Recipe;
