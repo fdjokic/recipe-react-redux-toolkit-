@@ -49,9 +49,11 @@ const RecipePopUp = () => {
     }, 2000);
     return () => clearTimeout(timeout);
   }, [id]);
+
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(instructions),
   });
+
   console.log(instructions);
   return (
     <Wrapper>

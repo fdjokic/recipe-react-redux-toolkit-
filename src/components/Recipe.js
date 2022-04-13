@@ -14,9 +14,9 @@ import RecipePopUp from "./RecipePopUp";
 
 //
 
-const Recipe = ({ recipe }) => {
-  const { title, image, id } = recipe;
-
+const Recipe = ({ item }) => {
+  const { title, image, id } = item;
+  console.log(item);
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [noPhoto, setNoPhoto] = useState("");
@@ -47,7 +47,7 @@ const Recipe = ({ recipe }) => {
     }, 2000);
     return () => clearTimeout(timeout);
   }, [id]);
-
+  console.log(instructions);
   return (
     <Wrapper onClick={() => setCardOpen(!cardOpen)}>
       <img src={image} alt={title} />

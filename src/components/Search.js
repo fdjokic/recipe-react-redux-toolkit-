@@ -10,6 +10,9 @@ import { diets } from "../assets/constants";
 import { cuisines } from "../assets/constants";
 import recipesSlice from "../features/recipes/recipesSlice";
 import Empty from "./Empty";
+import RecipePopUp from "./RecipePopUp";
+import Recipe from "./Recipe";
+import MealPlanComponent from "./MealPlanComponent";
 
 const variants = {
   initial: {
@@ -48,7 +51,7 @@ const Search = () => {
   if (loading) {
     return <Loading />;
   }
-  console.log(cuisine);
+  console.log(results);
 
   console.log(diet);
   const handleChange = (e) => {
@@ -116,31 +119,33 @@ const Search = () => {
             })}
           </div>
         </section>
-        {results.length > 1 || (!query && results.length > 1) ? (
+        {results.length < 1 || (query && results.length > 1) ? (
           <div className="container">
-            {results.map((recipe) => {
-              const { id, title, image } = recipe;
+            {results.map((item) => {
+              const { id, title, image } = item;
+              console.log(id);
               return (
-                <motion.article
-                  variants={variants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  className="card"
-                  key={id}
-                >
-                  <LazyLoadImage
-                    effect="blur"
-                    className="img-class"
-                    src={
-                      image ||
-                      "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg"
-                    }
-                    alt={title}
-                  />
+                <MealPlanComponent item={item} key={id} />
+                // <motion.article
+                //   variants={variants}
+                //   initial="initial"
+                //   animate="animate"
+                //   exit="exit"
+                //   className="card"
+                //   key={id}
+                // >
+                //   <LazyLoadImage
+                //     effect="blur"
+                //     className="img-class"
+                //     src={
+                //       image ||
+                //       "https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg"
+                //     }
+                //     alt={title}
+                //   />
 
-                  <h3>{title}</h3>
-                </motion.article>
+                //   <h3>{title}</h3>
+                // </motion.article>
               );
             })}
           </div>
@@ -224,7 +229,7 @@ const Wrapper = styled.div`
     justify-content: center;
     max-width: 100%;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 2rem;
     border-radius: 20px;
   }
   .card {

@@ -40,11 +40,11 @@ const Slider1 = () => {
           arrows: false,
         }}
       >
-        {veggie.map((recipe) => {
+        {veggie.map((item) => {
           return (
-            <SplideSlide className="slide" key={recipe.id}>
-              <Link className="link" to={`/recipes/${recipe.id}`}>
-                <Recipe recipe={recipe} />
+            <SplideSlide className="slide" key={item.id}>
+              <Link className="link" to={`/recipes/${item.id}`}>
+                <Recipe item={item} />
               </Link>
             </SplideSlide>
           );

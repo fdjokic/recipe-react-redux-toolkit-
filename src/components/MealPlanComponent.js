@@ -61,7 +61,7 @@ const MealPlanComponent = ({ item }) => {
     <Wrapper>
       <motion.div
         layout
-        className="container"
+        className="container2"
         onClick={() => setCardOpen(!cardOpen)}
       >
         <motion.div className="img-container">
@@ -90,7 +90,7 @@ const MealPlanComponent = ({ item }) => {
 const Wrapper = styled.div`
   background-color: transparent;
 
-  .container {
+  .container2 {
     display: flex;
     flex-direction: column;
     align-items: center;
