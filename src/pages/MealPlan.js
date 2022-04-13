@@ -105,7 +105,8 @@ const Wrapper = styled.div`
 
     background-color: rgba(255, 255, 255, 0.8);
     min-height: 400px;
-    width: 60vw;
+    min-width: 60vw;
+    max-width: 90vw;
     border-radius: 15px;
     margin-top: 2rem;
     margin-bottom: 1rem;

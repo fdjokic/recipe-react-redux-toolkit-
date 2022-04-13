@@ -2,64 +2,51 @@ import React from "react";
 import styled from "styled-components";
 const Loading = () => {
   return (
-    <Wrapper className="lds-heart">
-      <div></div>
+    <Wrapper>
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  .lds-heart {
+  height: 70vh;
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .lds-ripple {
     display: inline-block;
     position: relative;
     width: 80px;
     height: 80px;
-    transform: rotate(45deg);
-    transform-origin: 40px 40px;
   }
-  .lds-heart div {
-    top: 32px;
-    left: 32px;
+  .lds-ripple div {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    background: black;
-    animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    border: 4px solid black;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
   }
-  .lds-heart div:after,
-  .lds-heart div:before {
-    content: " ";
-    position: absolute;
-    display: block;
-    width: 32px;
-    height: 32px;
-    background: #fff;
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
   }
-  .lds-heart div:before {
-    left: -24px;
-    border-radius: 50% 0 0 50%;
-  }
-  .lds-heart div:after {
-    top: -24px;
-    border-radius: 50% 50% 0 0;
-  }
-  @keyframes lds-heart {
+  @keyframes lds-ripple {
     0% {
-      transform: scale(0.95);
-    }
-    5% {
-      transform: scale(1.1);
-    }
-    39% {
-      transform: scale(0.85);
-    }
-    45% {
-      transform: scale(1);
-    }
-    60% {
-      transform: scale(0.95);
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
     }
     100% {
-      transform: scale(0.9);
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
     }
   }
 `;
